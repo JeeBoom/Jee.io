@@ -1,0 +1,5 @@
+.sidebar>h1 {
+  width: 100px;
+  border-radius: 100%;
+  background: #ddd;
+}
