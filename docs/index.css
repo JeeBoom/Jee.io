@@ -1,5 +1,8 @@
 .sidebar>h1 {
   width: 100px;
   border-radius: 100%;
-  background: #ddd;
 }
+
+/* .sidebar .search:nth-child(1) {
+  display: none;
+} */
