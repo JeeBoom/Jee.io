@@ -278,3 +278,7 @@
 - [面试官：说说你对策略模式的理解？应用场景？](https://github.com/febobo/web-interview/issues/293)
 - [面试官：说说你对代理模式的理解？应用场景？](https://github.com/febobo/web-interview/issues/294)
 - [面试官：说说你对发布订阅、观察者模式的理解？区别？](https://github.com/febobo/web-interview/issues/295)
+
+<h3 style="text-align: center">前端大杂烩</h3>
+
+- [前端大杂烩](http://124.223.84.75/optimize/large-file-upload.html)
