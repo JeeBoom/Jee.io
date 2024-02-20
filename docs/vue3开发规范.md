@@ -59,7 +59,7 @@ const inputRef = ref();
   const queryFormState = {
     noticeTypeId: undefined, //分类
     keywords: '', //标题、作者、来源
-    documentNumber: '', //文号
+    documentNumber: '', //文号            
   };
   // 查询 公告 请求表单
   const queryForm = reactive({ ...queryFormState }); -->
@@ -291,3 +291,151 @@ store 按照业务进行拆分不同的 js 文件
 |   |-- employee                                 employee模块
 |   |-- behavior-log                             行为日志log模块
 |   |-- code-generator                           代码生成器模块
+
+# CSS规范
+推荐使用scss预编译 由于样式的情况比较多也比较复杂  做出如下规范
+# 6.1.避免
+避免使用标签选择器。因为在 Vue 中，特别是在局部组件，使用标签选择器效率特别低，损耗性能，建议需要的情况，直接定义 class；
+非特殊情况下，禁止使用 ID 选择器定义样式。有 JS 逻辑的情况除外；
+
+避免使用important选择器；
+
+避免大量的嵌套规则，控制在3级之内，对于超过4级的嵌套，考虑重写或新建子项；
+
+
+避免使用ID选择器及全局标签选择器防止污染全局样式；
+
+
+# 6.2.推荐使用
+
+提取公用样式进assets文件styles里，按模块/功能区分；
+
+|assets
+|-- styles
+| |-- common 放置公用样式，如重置，混合，复写element样式等 
+| |-- modules 放置模块样式
+
+
+推荐使用直接子选择器；
+
+/* 推荐 */ 
+.jdc {} 
+.jdc li {} 
+.jdc li p{}
+
+/* 不推荐 */ 
+*{} 
+#jdc {} 
+.jdc div{}
+
+
+使用 scoped 关键字，约束样式生效的范围
+
+<style lang="scss" scoped>
+.app-wrapper {
+  ... 
+}
+</style>
+
+
+使用变量
+可复用属性尽量抽离为页面变量，易于统一维护
+
+/* css */ 
+.class-name { 
+  color: red;
+  border-color: red; 
+} 
+
+/* scss */  
+$color: red; 
+.class-name { 
+  color: $color;
+  border-color: $color; 
+}
+
+# 6.3.书写顺序
+CSS 属性书写顺序：先决定定位宽高显示大小，再做局部细节修饰，推荐顺序（可以提升浏览器渲染 dom 的性能）：
+定位属性(或显示属性，display)->宽高属性->边距属性(margin, padding)->字体，背景，颜色等，修饰属性的定义，这样定义为了更好的可读性，让别人只要看一眼就能在脑海中浮现最终显示的效果。
+
+
+布局定位属性：display / position / float / clear / visibility / overflow
+
+
+自身属性：width / height / margin / padding / border / background
+
+
+文本属性：color / font / text-decoration / text-align / vertical-align / white- space / break-word
+
+
+其他属性（CSS3）：content / cursor / border-radius / box-shadow / text-shadow / background:linear-gradient …
+以下给出常用的定义示例：
+
+
+.class-name {
+  position: fixed;
+  top: 100px; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  display: block; 
+  width: 100%; 
+  height: 100%;
+  margin: 10px; 
+  padding: 10px; 
+  font-size: 14px; 
+  color: #000; 
+  background-color: red; 
+  border-radius: 2px; 
+  line-height: 1.42; 
+}
+
+# 6.4.样式覆盖
+组件内部需要覆盖UI框架样式，必须在最外层组件加类名
+
+# JS规范
+# 7.1.在vue-cli 脚手架使用架自带的指向 src 开发目录的 '@' 符号引入文件资源；
+
+# 7.2.使用计算属性规避 v-if 和 v-for 用在一起；
+
+# 7.3.统一使用单引号；
+
+# 7.4.坚持单一原则，函数内仅做该函数应该做的，尽量避免通过传入标记控制不同行为；
+
+# 7.5.优先考虑三目运算符，但谨记不要写超过3层的三目运算符；
+
+# 7.6.对于无用代码必须及时删除，例如：一些调试的 console 语句、无用的弃用功能代码
+
+# git提交规范
+1.  GitFlow 流程规范
+	开发分支（develop）‌
+	develop 分支是仓库的开发分支，这个分支包含最近发布到开发环境的代码。
+
+	预发布分支（release）‌
+	release 分支是仓库的预发布分支（测试），用于 QA 测试。从 develop 拉取，测试完成 merge 到 master 和 develop，如果测试期间，有其他版本合并入 master，需要同步到 release 版本，并进行测试。
+
+	生产分支（master）‌
+	master 分支是仓库的生产分支，这个分支包含最近发布到生产环境的代码， 这个分支需从 release 分支合并，禁止在这个分支直接修改 ‌。
+	
+2.  提交 commit 的类型，包括以下几种：
+	feat: 新功能
+	fix: 修复问题
+	docs: 修改文档
+	style: 修改代码格式，不影响代码逻辑
+	refactor: 重构代码，理论上不影响现有功能
+	perf: 提升性能
+
+**PS** git 命令练习网站 [https://learngitbranching.js.org/?locale=zh_CN]
+
+**Vue代码风格规范参考** [https://v2.cn.vuejs.org/v2/style-guide/index.html]
+
+**Vue3常用hook参考** [https://www.vueusejs.com/]
+
+**前端必备工具**
+1. Volta  包管理工具 官网 [https://docs.volta.sh/]
+
+2. node, git 自行安装最新稳定版 
+
+3. pnpm 安装命令  npm install -g pnpm
+
+4. 该链接收集了很多前端实用工具，自行浏览选择使用[https://juejin.cn/post/7187272143657730108]
