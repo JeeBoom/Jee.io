@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web Blur</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .shortcut-container {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        .shortcut-container h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+
+        .shortcut-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .shortcut-link {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .shortcut-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button id="toggleBlur">Toggle Blur</button>
+        <div class="slider-container">
+            <label for="blurAmount">Blur Amount:</label>
+            <input type="range" id="blurAmount" min="0" max="20" value="5">
+            <span id="blurValue">20px</span>
+        </div>
+        <div class="shortcut-container">
+            <h3>Keyboard Shortcut</h3>
+            <div id="currentShortcut">Current: Ctrl+Shift+B</div>
+            <div class="shortcut-info">Press the shortcut to toggle blur effect</div>
+            <a href="#" id="changeShortcut" class="shortcut-link">Change shortcut</a>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
